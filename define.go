@@ -1,44 +1,44 @@
 package fion
 
-type FormatNumber int
+type LogStyle int
 
 //FD: Foreground Default
 //FB: Foreground Bright
 //BD: Background Default
 //BB: Background Bright
 const (
-	FDBlack FormatNumber = iota
-	FDRed
-	FDGreen
-	FDYellow
-	FDBlue
-	FDMagenta
-	FDCyan
-	FDWhite
-	FBBlack
-	FBRed
-	FBGreen
-	FBYellow
-	FBBlue
-	FBMagenta
-	FBCyan
-	FBWhite
-	BDBlack
-	BDRed
-	BDGreen
-	BDYellow
-	BDBlue
-	BDMagenta
-	BDCyan
-	BDWhite
-	BBBlack
-	BBRed
-	BBGreen
-	BBYellow
-	BBBlue
-	BBMagenta
-	BBCyan
-	BBWhite
+	SFDBlack LogStyle = iota
+	SFDRed
+	SFDGreen
+	SFDYellow
+	SFDBlue
+	SFDMagenta
+	SFDCyan
+	SFDWhite
+	SFBBlack
+	SFBRed
+	SFBGreen
+	SFBYellow
+	SFBBlue
+	SFBMagenta
+	SFBCyan
+	SFBWhite
+	SBDBlack
+	SBDRed
+	SBDGreen
+	SBDYellow
+	SBDBlue
+	SBDMagenta
+	SBDCyan
+	SBDWhite
+	SBBBlack
+	SBBRed
+	SBBGreen
+	SBBYellow
+	SBBBlue
+	SBBMagenta
+	SBBCyan
+	SBBWhite
 	SBold
 	SItalic
 	SUnderline
@@ -51,47 +51,47 @@ const (
 	SOverline
 )
 
-var formatMap = map[FormatNumber]string{
-	FDBlack:          ";30",
-	FDRed:            ";31",
-	FDGreen:          ";32",
-	FDYellow:         ";33",
-	FDBlue:           ";34",
-	FDMagenta:        ";35",
-	FDCyan:           ";36",
-	FDWhite:          ";37",
-	FBBlack:          ";90",
-	FBRed:            ";91",
-	FBGreen:          ";92",
-	FBYellow:         ";93",
-	FBBlue:           ";94",
-	FBMagenta:        ";95",
-	FBCyan:           ";96",
-	FBWhite:          ";97",
-	BDBlack:          ";40",
-	BDRed:            ";41",
-	BDGreen:          ";42",
-	BDYellow:         ";43",
-	BDBlue:           ";44",
-	BDMagenta:        ";45",
-	BDCyan:           ";46",
-	BDWhite:          ";47",
-	BBBlack:          ";100",
-	BBRed:            ";101",
-	BBGreen:          ";102",
-	BBYellow:         ";103",
-	BBBlue:           ";104",
-	BBMagenta:        ";105",
-	BBCyan:           ";106",
-	BBWhite:          ";107",
-	SBold:            ";1",
-	SItalic:          ";3",
-	SUnderline:       ";4",
-	SSlowBlink:       ";5",
-	SInverse:         ";7",
-	SConceal:         ";8",
-	SCrossedOut:      ";9",
-	SDoublyUnderline: ";21",
-	SReveal:          ";28",
-	SOverline:        ";53",
+var formatMap = map[LogStyle]int{
+	SFDBlack:         30,
+	SFDRed:           31,
+	SFDGreen:         32,
+	SFDYellow:        33,
+	SFDBlue:          34,
+	SFDMagenta:       35,
+	SFDCyan:          36,
+	SFDWhite:         37,
+	SFBBlack:         90,
+	SFBRed:           91,
+	SFBGreen:         92,
+	SFBYellow:        93,
+	SFBBlue:          94,
+	SFBMagenta:       95,
+	SFBCyan:          96,
+	SFBWhite:         97,
+	SBDBlack:         40,
+	SBDRed:           41,
+	SBDGreen:         42,
+	SBDYellow:        43,
+	SBDBlue:          44,
+	SBDMagenta:       45,
+	SBDCyan:          46,
+	SBDWhite:         47,
+	SBBBlack:         100,
+	SBBRed:           101,
+	SBBGreen:         102,
+	SBBYellow:        103,
+	SBBBlue:          104,
+	SBBMagenta:       105,
+	SBBCyan:          106,
+	SBBWhite:         107,
+	SBold:            1,
+	SItalic:          3,
+	SUnderline:       4,
+	SSlowBlink:       5,
+	SInverse:         7,
+	SConceal:         8,
+	SCrossedOut:      9,
+	SDoublyUnderline: 21,
+	SReveal:          28,
+	SOverline:        53,
 }

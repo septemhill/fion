@@ -1,65 +1,51 @@
 package fion
 
-import "fmt"
-
-type styleNumber uint8
-
-const (
-	styleBold            = styleNumber(1)
-	styleItalic          = styleNumber(3)
-	styleUnderline       = styleNumber(4)
-	styleSlowBlink       = styleNumber(5)
-	styleInverse         = styleNumber(7)
-	styleConceal         = styleNumber(8)
-	styleCrossedOut      = styleNumber(9)
-	styleDoublyUnderline = styleNumber(21)
-	styleReveal          = styleNumber(28)
-	styleOverline        = styleNumber(53)
-)
-
-func generalFormat2(style styleNumber, format string, a ...interface{}) string {
-	if len(a) > 0 {
-		return fmt.Sprintf(fmt.Sprintf("\x1b[%d;0m%s\x1b[0m", style, format), a...)
-	}
-	return fmt.Sprintf("\x1b[%dm%s\x1b[0m", style, format)
-}
-
+//Bold make string format to be bold
 func Bold(format string, a ...interface{}) string {
-	return generalFormat2(styleBold, format, a...)
+	return generateFormat(SBold, format, a...)
 }
 
+//Italic make string format to be italic
 func Italic(format string, a ...interface{}) string {
-	return generalFormat2(styleItalic, format, a...)
+	return generateFormat(SItalic, format, a...)
 }
 
+//Underline make string format to be underline
 func Underline(format string, a ...interface{}) string {
-	return generalFormat2(styleUnderline, format, a...)
+	return generateFormat(SUnderline, format, a...)
 }
 
+//SlowBlink make string format to be slow blink
 func SlowBlink(format string, a ...interface{}) string {
-	return generalFormat2(styleSlowBlink, format, a...)
+	return generateFormat(SSlowBlink, format, a...)
 }
 
+//Inverse make string format to be inverse
 func Inverse(format string, a ...interface{}) string {
-	return generalFormat2(styleInverse, format, a...)
+	return generateFormat(SInverse, format, a...)
 }
 
+//Conceal make string format to be conceal
 func Conceal(format string, a ...interface{}) string {
-	return generalFormat2(styleConceal, format, a...)
+	return generateFormat(SConceal, format, a...)
 }
 
+//CrossedOut make string format to be crossed out
 func CrossedOut(format string, a ...interface{}) string {
-	return generalFormat2(styleCrossedOut, format, a...)
+	return generateFormat(SCrossedOut, format, a...)
 }
 
+//DoublyUnderline make string format to be doubly underline
 func DoublyUnderline(format string, a ...interface{}) string {
-	return generalFormat2(styleDoublyUnderline, format, a...)
+	return generateFormat(SDoublyUnderline, format, a...)
 }
 
+//Reveal make string format to be reveal
 func Reveal(format string, a ...interface{}) string {
-	return generalFormat2(styleReveal, format, a...)
+	return generateFormat(SReveal, format, a...)
 }
 
+//Overline make string format to be overline
 func Overline(format string, a ...interface{}) string {
-	return generalFormat2(styleOverline, format, a...)
+	return generateFormat(SOverline, format, a...)
 }

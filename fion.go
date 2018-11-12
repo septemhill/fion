@@ -2,21 +2,27 @@ package fion
 
 import "fmt"
 
-func buildFormatting(f ...FormatNumber) string {
+func generateFormat(style LogStyle, format string, a ...interface{}) string {
+	if len(a) > 0 {
+		return fmt.Sprintf(fmt.Sprintf("\x1b[%dm%s\x1b[0m", formatMap[style], format), a...)
+	}
+
+	return fmt.Sprintf("\x1b[%dm%s\x1b[0m", formatMap[style], format)
+}
+
+func buildFormatting(f ...LogStyle) string {
 	format := ""
 
 	for _, value := range f {
-		//fmt.Println("RRR", key, value)
-		format += formatMap[value]
+		format += fmt.Sprintf(";%d", formatMap[value])
 	}
 
 	return format
 }
 
-func New(f ...FormatNumber) func(format string, a ...interface{}) string {
-	//str := ";1;3;5;31"
+//New customize your own format function
+func New(f ...LogStyle) func(format string, a ...interface{}) string {
 	customizeFormat := buildFormatting(f...)
-	fmt.Println("[FORMAT]", customizeFormat)
 
 	return func(format string, a ...interface{}) string {
 		if len(a) > 0 {
