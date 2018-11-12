@@ -5,6 +5,7 @@ import "fmt"
 type styleNumber uint8
 
 const (
+	styleBold            = styleNumber(1)
 	styleItalic          = styleNumber(3)
 	styleUnderline       = styleNumber(4)
 	styleSlowBlink       = styleNumber(5)
@@ -21,6 +22,10 @@ func generalFormat2(style styleNumber, format string, a ...interface{}) string {
 		return fmt.Sprintf(fmt.Sprintf("\x1b[%d;0m%s\x1b[0m", style, format), a...)
 	}
 	return fmt.Sprintf("\x1b[%dm%s\x1b[0m", style, format)
+}
+
+func Bold(format string, a ...interface{}) string {
+	return generalFormat2(styleBold, format, a...)
 }
 
 func Italic(format string, a ...interface{}) string {
