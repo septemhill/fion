@@ -20,12 +20,21 @@ func buildFormatting(f ...LogStyle) string {
 	return format
 }
 
+//SetTagLevel rewrite tag level
+func SetTagLevel(lv int) {
+	TagLevel = lv
+}
+
 //NewTag customize your own tag funcion
-func NewTag(tagName string, f ...LogStyle) (Print, Printf) {
+func NewTag(tagName string, curTagLevel int, f ...LogStyle) (Print, Printf) {
 	return func(a ...interface{}) {
-			fmt.Print(composeString(NewFormat(f...)(tagName), a...))
+			if curTagLevel >= TagLevel {
+				fmt.Print(composeString(NewFormat(f...)(tagName), a...))
+			}
 		}, func(format string, a ...interface{}) {
-			fmt.Println(composeFormat(NewFormat(f...)(tagName), format, a...))
+			if curTagLevel >= TagLevel {
+				fmt.Println(composeFormat(NewFormat(f...)(tagName), format, a...))
+			}
 		}
 }
 
