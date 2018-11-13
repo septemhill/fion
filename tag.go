@@ -4,66 +4,33 @@ import (
 	"fmt"
 )
 
-const (
-	tagTrace = "[TRACE]"
-	tagDebug = "[DEBUG]"
-	tagInfo  = "[INFO]"
-	tagWarn  = "[WARN]"
-	tagError = "[ERROR]"
-)
+var Trace Print
+var Debug Print
+var Info Print
+var Warn Print
+var Error Print
 
-var tagFormatMap = map[string]func(format string, a ...interface{}) string{
-	tagTrace: NewFormat(SBold, SFBWhite),
-	tagDebug: NewFormat(SBold, SFBGreen),
-	tagInfo:  NewFormat(SBold, SFBYellow),
-	tagWarn:  NewFormat(SBold, SFBBlue),
-	tagError: NewFormat(SBold, SFDRed),
-}
+var Tracef Printf
+var Debugf Printf
+var Infof Printf
+var Warnf Printf
+var Errorf Printf
 
 func composeFormat(tag string, format string, a ...interface{}) string {
-	return fmt.Sprintf("%s", tagFormatMap[tag](tag)) + fmt.Sprintf(format, a...)
+	return fmt.Sprintf("%s", tag) + fmt.Sprintf(format, a...)
 }
 
 func composeString(tag string, strs ...interface{}) string {
-	return fmt.Sprint(tagFormatMap[tag](tag)) + fmt.Sprintln(strs...)
+	return fmt.Sprint(tag) + fmt.Sprintln(strs...)
 }
 
-func Trace(a ...interface{}) {
-	fmt.Print(composeString(tagTrace, a...))
-}
+func init() {
+	t1, t2 := NewTag("[TRACE]", SBold, SFBWhite, SInverse)
+	d1, d2 := NewTag("[DEBUG]", SBold, SFBGreen, SInverse)
+	i1, i2 := NewTag("[INFO]", SBold, SFBYellow, SInverse)
+	w1, w2 := NewTag("[WARN]", SBold, SFBBlue, SInverse)
+	e1, e2 := NewTag("[ERROR]", SBold, SFDRed, SInverse)
 
-func Debug(a ...interface{}) {
-	fmt.Print(composeString(tagDebug, a...))
-}
-
-func Info(a ...interface{}) {
-	fmt.Print(composeString(tagInfo, a...))
-}
-
-func Warn(a ...interface{}) {
-	fmt.Print(composeString(tagWarn, a...))
-}
-
-func Error(a ...interface{}) {
-	fmt.Print(composeString(tagError, a...))
-}
-
-func Tracef(format string, a ...interface{}) {
-	fmt.Println(composeFormat(tagTrace, format, a...))
-}
-
-func Debugf(format string, a ...interface{}) {
-	fmt.Println(composeFormat(tagDebug, format, a...))
-}
-
-func Infof(format string, a ...interface{}) {
-	fmt.Println(composeFormat(tagInfo, format, a...))
-}
-
-func Warnf(format string, a ...interface{}) {
-	fmt.Println(composeFormat(tagWarn, format, a...))
-}
-
-func Errorf(format string, a ...interface{}) {
-	fmt.Println(composeFormat(tagError, format, a...))
+	Trace, Debug, Info, Warn, Error = t1, d1, i1, w1, e1
+	Tracef, Debugf, Infof, Warnf, Errorf = t2, d2, i2, w2, e2
 }

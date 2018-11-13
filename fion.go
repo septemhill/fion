@@ -20,15 +20,12 @@ func buildFormatting(f ...LogStyle) string {
 	return format
 }
 
-//func ChangeTagFormat(formatFunc func(format string, a ...interface{}) string) {
-//}
-
 //NewTag customize your own tag funcion
-func NewTag(tagName string, f ...LogStyle) {
+func NewTag(tagName string, f ...LogStyle) (Print, Printf) {
 	return func(a ...interface{}) {
-			fmt.Print(composeString(tagName, a...))
+			fmt.Print(composeString(NewFormat(f...)(tagName), a...))
 		}, func(format string, a ...interface{}) {
-			fmt.Println(composeFormat(tagTrace, format, a...))
+			fmt.Println(composeFormat(NewFormat(f...)(tagName), format, a...))
 		}
 }
 

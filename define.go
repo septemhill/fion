@@ -2,10 +2,13 @@ package fion
 
 type LogStyle int
 
-//FD: Foreground Default
-//FB: Foreground Bright
-//BD: Background Default
-//BB: Background Bright
+type Print func(a ...interface{})
+type Printf func(format string, a ...interface{})
+
+// FD: Foreground Default
+// FB: Foreground Bright
+// BD: Background Default
+// BB: Background Bright
 const (
 	SFDBlack LogStyle = iota
 	SFDRed
