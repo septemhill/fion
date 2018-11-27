@@ -19,11 +19,11 @@ var Errorf Printf
 var TagLevel int = 2
 
 func composeFormat(tag string, format string, a ...interface{}) string {
-	return fmt.Sprintf("%s", tag) + fmt.Sprintf(format, a...)
+	return fmt.Sprintf("%s ", tag) + fmt.Sprintf(format, a...)
 }
 
 func composeString(tag string, strs ...interface{}) string {
-	return fmt.Sprint(tag) + fmt.Sprintln(strs...)
+	return fmt.Sprintf("%s ", fmt.Sprint(tag)) + fmt.Sprintln(strs...)
 }
 
 func init() {
