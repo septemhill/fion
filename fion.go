@@ -2,8 +2,9 @@ package fion
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"regexp"
+	"syscall"
 	"time"
 )
 
@@ -27,10 +28,11 @@ func buildFormatting(f ...LogStyle) string {
 
 func logToFile(msg string) {
 	now := time.Now()
-	//t := fmt.Sprintf("%d:%d:%d %02d:%02d:%02d", now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute(), now.Second())
 	re := regexp.MustCompile("\x1b[[0-9;]*m")
 	text := re.ReplaceAllLiteralString(msg, "")
-	ioutil.WriteFile(fionConf.errorLog, []byte(now.String()+text), 0664)
+	file, _ := os.OpenFile(fionConf.errorLog, syscall.O_CREAT|syscall.O_APPEND|syscall.O_RDWR, 0664)
+	file.Write([]byte(now.String() + text))
+	file.Close()
 }
 
 //SetTagLevel rewrite tag level
